@@ -12,7 +12,6 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
 import { supabase } from "@/utils/supabase";
-import { Session } from "@supabase/supabase-js";
 
 import { useWorkStore } from "@/stores/workManagerStore";
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -47,7 +46,7 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
       if (session) {
         fetchData();
-        router.replace("/(tabs)");
+        router.replace("/(tabs)/(work)");
       } else {
         router.replace("/auth");
       }

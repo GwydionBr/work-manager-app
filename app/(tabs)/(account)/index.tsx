@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
-import { StyleSheet, View, Alert, ScrollView } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import { Button, Input } from "@rneui/themed";
-import { Session } from "@supabase/supabase-js";
 import Avatar from "@/components/Avatar";
 import { useWorkStore } from "@/stores/workManagerStore";
+import Animated from "react-native-reanimated";
+import ThemedSafeAreaView from "@/components/ThemedSafeAreaView";
 
 export default function AccountScreen() {
   const [loading, setLoading] = useState(true);
@@ -82,8 +83,8 @@ export default function AccountScreen() {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <ThemedSafeAreaView>
+      <Animated.ScrollView>
         <View style={styles.avatar}>
           <Avatar
             size={200}
@@ -130,8 +131,8 @@ export default function AccountScreen() {
             onPress={() => supabase.auth.signOut()}
           />
         </View>
-      </View>
-    </ScrollView>
+      </Animated.ScrollView>
+    </ThemedSafeAreaView>
   );
 }
 
@@ -144,9 +145,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   container: {
-    marginTop: 15,
-    padding: 12,
-    alignItems: "center",
+    flex: 1,
   },
   verticallySpaced: {
     paddingTop: 4,
