@@ -1,22 +1,16 @@
-import { FlatList, Text, StyleSheet, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { WorkStackParamList } from "@/Stacks/WorkStack";
+import { FlatList, Text, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
 import { useWorkStore } from "@/stores/workManagerStore";
 import ProjectRow from "./ProjectRow";
-
-type ListProjectsNavProp = NativeStackNavigationProp<
-  WorkStackParamList,
-  "WorkScreen"
->;
 
 const ListProjects = () => {
   const { projects } = useWorkStore();
 
-  const navigation = useNavigation<ListProjectsNavProp>();
+  const router = useRouter();
+
 
   function handleProjectPress({ projectId }: { projectId: string }) {
-    navigation.navigate("ProjectDetailScreen", { projectId });
+    router.push(`/(tabs)/(work)/${projectId}`);
   }
 
   if (!projects.length) {

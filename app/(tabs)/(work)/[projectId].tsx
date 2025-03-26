@@ -1,23 +1,18 @@
+import { useNavigation, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import type { WorkStackParamList } from "@/Stacks/WorkStack";
 import { useWorkStore } from "@/stores/workManagerStore";
 
 import { TimerProject } from "@/stores/workManagerStore";
-
 import ListSessions from "@/components/Work/Session/ListSessions";
 import { ThemedText } from "@/components/ThemedText";
 
-type ProjectDetailProps = NativeStackScreenProps<
-  WorkStackParamList,
-  "ProjectDetailScreen"
->;
+const ProjectDetailScreen = () => {
+  const navigation = useNavigation();
 
-const ProjectDetailScreen = ({ route, navigation }: ProjectDetailProps) => {
   const [project, setProject] = useState<TimerProject | null>(null);
 
-  const { projectId } = route.params;
+  const { projectId } = useLocalSearchParams<{ projectId: string}>();
   const { projects } = useWorkStore();
 
   useEffect(() => {
