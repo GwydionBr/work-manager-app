@@ -1,5 +1,6 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { Tables } from "@/types/db.types";
+import { ThemedText } from "../ThemedText";
 
 interface ListPayoutProps {
   payouts: Tables<"payout">[] | null;
@@ -7,16 +8,16 @@ interface ListPayoutProps {
 
 const ListPayout = ({ payouts }: ListPayoutProps) => {
   if (!payouts || payouts.length === 0) {
-    return <Text>Please add some Payouts!</Text>;
+    return <ThemedText>Please add some Payouts!</ThemedText>;
   }
 
   return (
     <>
       <FlatList
         data={payouts}
-        renderItem={({ item }) => <Text>{item.amount}</Text>}
+        renderItem={({ item }) => <ThemedText>{item.amount}</ThemedText>}
       />
-      <Text>Some List</Text>
+      <ThemedText>Some List</ThemedText>
     </>
   );
 };

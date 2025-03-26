@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { WorkStackParamList } from "@/Stacks/WorkStack";
 import { useWorkStore } from "@/stores/workManagerStore";
@@ -7,6 +7,7 @@ import { useWorkStore } from "@/stores/workManagerStore";
 import { TimerProject } from "@/stores/workManagerStore";
 
 import ListSessions from "@/components/Work/Session/ListSessions";
+import { ThemedText } from "@/components/ThemedText";
 
 type ProjectDetailProps = NativeStackScreenProps<
   WorkStackParamList,
@@ -34,7 +35,7 @@ const ProjectDetailScreen = ({ route, navigation }: ProjectDetailProps) => {
 
   return (
     <View>
-      <Text>{project.project.title}</Text>
+      <ThemedText>{project.project.title}</ThemedText>
       <ListSessions />
     </View>
   );

@@ -1,12 +1,13 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
+import { ThemedText } from '@/components/ThemedText'
 
 const SessionRow = () => {
   return (
     <View>
-      <Text>SessionRow</Text>
+      <ThemedText>SessionRow</ThemedText>
     </View>
-  )
+  );
 }
 
 export default SessionRow

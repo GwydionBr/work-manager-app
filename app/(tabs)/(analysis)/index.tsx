@@ -1,11 +1,12 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
 import ThemedSafeAreaView from "@/components/ThemedSafeAreaView";
+import { ThemedText } from "@/components/ThemedText";
 
 const AnalysisScreen = () => {
   return (
     <ThemedSafeAreaView>
-      <Text>AnalysisScreen</Text>
+      <ThemedText>AnalysisScreen</ThemedText>
     </ThemedSafeAreaView>
   );
 };

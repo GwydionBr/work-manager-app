@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { Tables } from "@/types/db.types";
-import { Colors } from "@/constants/Colors";
+import { ThemedText } from "@/components/ThemedText";
 
 interface ProjectRowProps {
   project: Tables<"timerProject">;
@@ -9,14 +9,19 @@ interface ProjectRowProps {
 
 const ProjectRow = ({ project, onPress }: ProjectRowProps) => {
   return (
-    <Pressable onPress={onPress} style={(state) => state.pressed && styles.pressed}>
+    <Pressable
+      onPress={onPress}
+      style={(state) => state.pressed && styles.pressed}
+    >
       <View style={styles.rowContainer}>
         <View style={styles.leftContainer}>
-          <Text style={styles.title}>{project.title}</Text>
-          <Text style={styles.description}>{project.description}</Text>
+          <ThemedText style={styles.title}>{project.title}</ThemedText>
+          <ThemedText style={styles.description}>
+            {project.description}
+          </ThemedText>
         </View>
         <View style={styles.rightContainer}>
-          <Text>{project.salary}</Text>
+          <ThemedText>{project.salary}</ThemedText>
         </View>
       </View>
     </Pressable>
@@ -30,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     padding: 10,
-    backgroundColor: Colors.rowBackground,
+    // backgroundColor: Colors.rowBackground,
     justifyContent: "space-between",
     borderRadius: 10,
     marginHorizontal: 10,

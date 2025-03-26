@@ -1,10 +1,11 @@
 import ThemedSafeAreaView from "@/components/ThemedSafeAreaView";
-import { StyleSheet, Text } from "react-native";
+import { ThemedText } from "@/components/ThemedText";
+import { StyleSheet } from "react-native";
 
 const NewPayoutScreen = () => {
   return (
     <ThemedSafeAreaView>
-      <Text>NewPayoutScreen</Text>
+      <ThemedText>NewPayoutScreen</ThemedText>
     </ThemedSafeAreaView>
   );
 };
