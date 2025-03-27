@@ -23,12 +23,12 @@ export default function PayoutLayout() {
               icon="add"
               color={tintColor}
               size={24}
-              onPress={() => router.push("/(tabs)/(finances)/newPayout")}
+              onPress={() => router.push("/(tabs)/(finances)/newCashFlow")}
             />
           ),
         }}
       />
-      <Stack.Screen name="newPayout" options={{ headerShown: false }} />
+      <Stack.Screen name="newCashFlow" options={{ headerShown: false }} />
     </Stack>
   );
 }

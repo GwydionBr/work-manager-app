@@ -34,6 +34,33 @@ export type Database = {
   };
   public: {
     Tables: {
+      expense: {
+        Row: {
+          amount: number;
+          currency: string;
+          date: string;
+          id: number;
+          title: string;
+          user_id: string;
+        };
+        Insert: {
+          amount: number;
+          currency?: string;
+          date: string;
+          id?: number;
+          title?: string;
+          user_id?: string;
+        };
+        Update: {
+          amount?: number;
+          currency?: string;
+          date?: string;
+          id: number;
+          title?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
       generalUserSettings: {
         Row: {
           default_currency: string;
@@ -49,29 +76,35 @@ export type Database = {
         };
         Update: {
           default_currency?: string;
-          id?: string;
+          id: string;
           rounding_option?: string;
           user_id?: string;
         };
         Relationships: [];
       };
-      payout: {
+      income: {
         Row: {
           amount: number;
+          currency: string;
           date: string;
           id: number;
+          title: string;
           user_id: string;
         };
         Insert: {
           amount: number;
+          currency?: string;
           date: string;
           id?: number;
+          title: string;
           user_id?: string;
         };
         Update: {
           amount?: number;
+          currency?: string;
           date?: string;
-          id?: number;
+          id: number;
+          title?: string;
           user_id?: string;
         };
         Relationships: [];
@@ -81,34 +114,36 @@ export type Database = {
           avatar_url: string | null;
           full_name: string | null;
           id: string;
-          updated_at: string | null;
-          username: string | null;
+          updated_at: string;
+          username: string;
           website: string | null;
         };
         Insert: {
           avatar_url?: string | null;
           full_name?: string | null;
           id: string;
-          updated_at?: string | null;
-          username?: string | null;
+          updated_at: string;
+          username?: string;
           website?: string | null;
         };
         Update: {
           avatar_url?: string | null;
           full_name?: string | null;
-          id?: string;
-          updated_at?: string | null;
-          username?: string | null;
+          id: string;
+          updated_at?: string;
+          username?: string;
           website?: string | null;
         };
         Relationships: [];
       };
-      spending: {
+      recurringExpense: {
         Row: {
           amount: number;
+          currency: string;
           description: string;
           end_date: string | null;
           id: number;
+          interval: number | null;
           monthly: boolean;
           start_date: string;
           title: string;
@@ -116,9 +151,11 @@ export type Database = {
         };
         Insert: {
           amount: number;
+          currency?: string;
           description: string;
           end_date?: string | null;
           id?: number;
+          interval?: number | null;
           monthly: boolean;
           start_date: string;
           title: string;
@@ -126,9 +163,50 @@ export type Database = {
         };
         Update: {
           amount?: number;
+          currency?: string;
           description?: string;
           end_date?: string | null;
+          id: number;
+          interval?: number | null;
+          monthly?: boolean;
+          start_date?: string;
+          title?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
+      recurringIncome: {
+        Row: {
+          amount: number;
+          currency: string;
+          description: string;
+          end_date: string | null;
+          id: number;
+          interval: number | null;
+          monthly: boolean;
+          start_date: string;
+          title: string;
+          user_id: string;
+        };
+        Insert: {
+          amount: number;
+          currency?: string;
+          description: string;
+          end_date?: string | null;
           id?: number;
+          interval?: number | null;
+          monthly: boolean;
+          start_date: string;
+          title: string;
+          user_id?: string;
+        };
+        Update: {
+          amount?: number;
+          currency?: string;
+          description?: string;
+          end_date?: string | null;
+          id: number;
+          interval?: number | null;
           monthly?: boolean;
           start_date?: string;
           title?: string;
