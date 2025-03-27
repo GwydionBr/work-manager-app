@@ -19,6 +19,7 @@ export const Colors = {
     inputBackground: "#f0f0f0",
     inputPlaceholder: "#888888",
     inputText: "#11181C",
+    shadow: "#000000",
   },
   dark: {
     text: "#ECEDEE",
@@ -32,6 +33,7 @@ export const Colors = {
     inputBackground: "#1A1A1A",
     inputPlaceholder: "#888888",
     inputText: "#ECEDEE",
+    shadow: "#ffffff",
   },
 };
 

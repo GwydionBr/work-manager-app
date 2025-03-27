@@ -2,6 +2,8 @@ import { View, StyleSheet, Pressable } from "react-native";
 import { Tables } from "@/types/db.types";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "react-native";
 
 interface ProjectRowProps {
   project: Tables<"timerProject">;
@@ -9,12 +11,15 @@ interface ProjectRowProps {
 }
 
 const ProjectRow = ({ project, onPress }: ProjectRowProps) => {
+  const colorScheme = useColorScheme() || "light";
+  const shadowColor = Colors[colorScheme].shadow;
+
   return (
     <Pressable
       onPress={onPress}
       style={(state) => state.pressed && styles.pressed}
     >
-      <ThemedView style={styles.rowContainer}>
+      <ThemedView style={[styles.rowContainer, { shadowColor }]}>
         <View style={styles.leftContainer}>
           <ThemedText style={styles.title}>{project.title}</ThemedText>
           <ThemedText style={styles.description}>
@@ -41,7 +46,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 10,
     marginVertical: 10,
-    shadowColor: "black",
     shadowRadius: 3,
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
