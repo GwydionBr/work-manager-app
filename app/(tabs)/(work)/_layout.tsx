@@ -29,7 +29,7 @@ export default function WorkLayout() {
         }}
       />
       <Stack.Screen name="newProject" />
-      <Stack.Screen name="[projectId]" />
+      <Stack.Screen name="[projectId]/index" />
     </Stack>
   );
 }
