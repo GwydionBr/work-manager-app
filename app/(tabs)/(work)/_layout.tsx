@@ -2,6 +2,7 @@ import { Stack, useRouter } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import HeaderBackground from "@/components/ui/HeaderBackground";
 import IconButton from "@/components/ui/IconButton";
+import { StyleSheet } from "react-native";
 
 export default function WorkLayout() {
   const colorScheme = useColorScheme() ?? "light";
@@ -21,9 +22,10 @@ export default function WorkLayout() {
           headerRight: ({ tintColor }) => (
             <IconButton 
               icon="add"
-              size={24} 
+              size={30} 
               color={tintColor} 
               onPress={() => router.push("/(tabs)/(work)/newProject")}
+              buttonStyle={styles.addButton}
             />
           ),
         }}
@@ -33,3 +35,9 @@ export default function WorkLayout() {
     </Stack>
   );
 }
+
+const styles = StyleSheet.create({
+  addButton: {
+    marginBottom: 20,
+  },
+})

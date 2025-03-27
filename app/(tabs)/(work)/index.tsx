@@ -4,7 +4,7 @@ import ThemedSafeAreaView from "@/components/ThemedSafeAreaView";
 
 const ProjectScreen = () => {
   return (
-    <ThemedSafeAreaView>
+    <ThemedSafeAreaView style={styles.container}>
       <ListProjects />
     </ThemedSafeAreaView>
   );

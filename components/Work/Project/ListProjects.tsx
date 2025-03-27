@@ -62,6 +62,7 @@ const ListProjects = () => {
       renderHiddenItem={renderHiddenItem}
       rightOpenValue={-75}
       leftOpenValue={75}
+      style={styles.listContainer}
     />
   );
 };
@@ -69,6 +70,10 @@ const ListProjects = () => {
 export default ListProjects;
 
 const styles = StyleSheet.create({
+  listContainer: {
+    flex: 1,
+    paddingTop: 25,
+  },
   centered: {
     flex: 1,
     justifyContent: "center",
