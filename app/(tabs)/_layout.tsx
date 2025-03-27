@@ -1,13 +1,13 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Tabs } from "expo-router";
+import React from "react";
+import { Platform, StyleSheet } from "react-native";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import HeaderBackground from '@/components/ui/HeaderBackground';
+import { HapticTab } from "@/components/HapticTab";
+import { IconSymbol } from "@/components/ui/IconSymbol";
+import TabBarBackground from "@/components/ui/TabBarBackground";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import HeaderBackground from "@/components/ui/HeaderBackground";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -21,7 +21,7 @@ export default function TabLayout() {
         headerShown: false,
         // tabBarButton: HapticTab,
         tabBarBackground: () => <HeaderBackground />,
-        // tabBarItemStyle: styles.tabBatItem,
+        tabBarItemStyle: styles.tabBatItem,
         // tabBarStyle: styles.tabBar,
         // tabBarLabelStyle: styles.tabBarLabel,
         // tabBarIconStyle: styles.tabBarIcon,
@@ -37,6 +37,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="(finances)"
+        options={{
+          title: "Finances",
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="arrow.up.arrow.down" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="(analysis)"
         options={{
           title: "Analysis",
@@ -46,15 +55,6 @@ export default function TabLayout() {
               name="chart.line.uptrend.xyaxis"
               color={color}
             />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="(finances)"
-        options={{
-          title: "Finances",
-          tabBarIcon: ({ color, size }) => (
-            <IconSymbol size={size} name="arrow.up.arrow.down" color={color} />
           ),
         }}
       />
@@ -74,9 +74,9 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   tabBatItem: {
     flex: 1,
-    paddingHorizontal: 8,
-    borderRadius: 15,
-    // padding: 8,
+    // paddingHorizontal: 8,
+    borderRadius: 30,
+    overflow: "hidden",
   },
   tabBar: {
     flex: 1,

@@ -1,16 +1,16 @@
 import { PropsWithChildren } from 'react'
-import { StyleSheet, SafeAreaView } from 'react-native'
+import { StyleSheet, SafeAreaView, type ViewProps } from 'react-native'
 import { ThemedView } from './ThemedView'
 
-const ThemedSafeAreaView = ({ children} : PropsWithChildren) => {
+interface ThemedSafeAreaViewProps extends ViewProps {}
+
+const ThemedSafeAreaView = ({ children }: ThemedSafeAreaViewProps) => {
   return (
     <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        {children}
-      </SafeAreaView>
+      <SafeAreaView style={styles.container}>{children}</SafeAreaView>
     </ThemedView>
   );
-}
+};
 
 export default ThemedSafeAreaView
 

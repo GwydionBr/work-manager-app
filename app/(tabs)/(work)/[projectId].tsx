@@ -1,13 +1,14 @@
-import { useNavigation, useLocalSearchParams } from "expo-router";
+import { useRouter, useNavigation, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
 import { useWorkStore } from "@/stores/workManagerStore";
 
 import { TimerProject } from "@/stores/workManagerStore";
 import ListSessions from "@/components/Work/Session/ListSessions";
 import { ThemedText } from "@/components/ThemedText";
+import ThemedSafeAreaView from "@/components/ThemedSafeAreaView";
 
 const ProjectDetailScreen = () => {
+  const router = useRouter();
   const navigation = useNavigation();
 
   const [project, setProject] = useState<TimerProject | null>(null);
@@ -18,9 +19,10 @@ const ProjectDetailScreen = () => {
   useEffect(() => {
     const project = projects.find((p) => p.project.id === projectId);
     if (!project) {
-      navigation.goBack();
+      router.back();
       return;
     }
+    navigation.setOptions({ title: project.project.title });
     setProject(project as TimerProject);
   }, [projectId, projects]);
 
@@ -29,10 +31,10 @@ const ProjectDetailScreen = () => {
   }
 
   return (
-    <View>
+    <ThemedSafeAreaView>
       <ThemedText>{project.project.title}</ThemedText>
       <ListSessions />
-    </View>
+    </ThemedSafeAreaView>
   );
 };
 

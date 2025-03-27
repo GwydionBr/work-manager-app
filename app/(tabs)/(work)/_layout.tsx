@@ -1,24 +1,35 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Colors } from "@/constants/Colors";
-import { LinearGradient } from "expo-linear-gradient";
 import HeaderBackground from "@/components/ui/HeaderBackground";
+import IconButton from "@/components/ui/IconButton";
 
 export default function WorkLayout() {
   const colorScheme = useColorScheme() ?? "light";
+  const router = useRouter();
 
   return (
     <Stack
       screenOptions={{
-        headerBackground: () => (
-          <HeaderBackground />
-        ),
+        headerBackground: () => <HeaderBackground />,
         headerTintColor: colorScheme === "dark" ? "#ECEDEE" : "#11181C",
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Work" }} />
-      <Stack.Screen name="newProject" options={{ headerShown: false }} />
-      <Stack.Screen name="[projectId]" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="index"
+        options={{
+          title: "Work",
+          headerRight: ({ tintColor }) => (
+            <IconButton 
+              icon="add"
+              size={24} 
+              color={tintColor} 
+              onPress={() => router.push("/(tabs)/(work)/newProject")}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen name="newProject" />
+      <Stack.Screen name="[projectId]" />
     </Stack>
   );
 }

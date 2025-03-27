@@ -15,8 +15,10 @@ export const Colors = {
     tabIconDefault: "#687076",
     tabIconSelected: tintColorLight,
     tabBarActiveBackground: "#b9cf8a",
-    headerBackground: ["#c17388", "#90306f"],
     headerTintColor: "#11181C",
+    inputBackground: "#f0f0f0",
+    inputPlaceholder: "#888888",
+    inputText: "#11181C",
   },
   dark: {
     text: "#ECEDEE",
@@ -26,7 +28,20 @@ export const Colors = {
     tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
     tabBarActiveBackground: "#1A1A1A",
-    headerBackground: ["#c17388", "#90306f"],
     headerTintColor: "#ECEDEE",
+    inputBackground: "#1A1A1A",
+    inputPlaceholder: "#888888",
+    inputText: "#ECEDEE",
+  },
+};
+
+
+
+export const ColorGradients: Record<'light' | 'dark', Record<string, [string, string, ...string[]]>> = {
+  light: {
+    headerBackground: ["#c17388", "#90306f"],
+  },
+  dark: {
+    headerBackground: ["#c17388", "#90306f"],
   },
 };

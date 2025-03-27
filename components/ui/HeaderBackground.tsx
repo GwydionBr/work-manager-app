@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import {Colors} from "@/constants/Colors";
+import {ColorGradients, Colors} from "@/constants/Colors";
 
 const HeaderBackground = () => {
   const colorScheme = useColorScheme() ?? "light";
@@ -8,7 +8,7 @@ const HeaderBackground = () => {
   return (
     <LinearGradient
       colors={
-        Colors[colorScheme].headerBackground as [string, string, ...string[]]
+        ColorGradients[colorScheme].headerBackground 
       }
       style={{ flex: 1 }}
       start={{ x: 0, y: 0 }}
