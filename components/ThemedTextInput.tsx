@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   label: {
-    
+    marginBottom: 5,
   }
 });

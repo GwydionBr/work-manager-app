@@ -10,6 +10,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import ThemedTextInput from "@/components/ThemedTextInput";
 import ThemedSafeAreaView from "@/components/ThemedSafeAreaView";
 import { ThemedView } from "@/components/ThemedView";
+import ThemedPicker from "@/components/ThemedPicker";
 
 const projectSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -71,7 +72,6 @@ const ProjectForm = ({ initialData, onSuccess }: ProjectFormProps) => {
         }
       }
 
-      Alert.alert("Success", "Project saved successfully!");
       onSuccess?.();
     } catch (error: any) {
       Alert.alert("Error", error.message || "An error occurred");
@@ -82,7 +82,9 @@ const ProjectForm = ({ initialData, onSuccess }: ProjectFormProps) => {
 
   return (
     <ThemedSafeAreaView style={styles.container}>
-      <ThemedText style={styles.formTitle} type="subtitle">Project Form</ThemedText>
+      <ThemedText style={styles.formTitle} type="subtitle">
+        Project Form
+      </ThemedText>
 
       <ThemedView style={styles.inputContainer}>
         <Controller
@@ -127,47 +129,52 @@ const ProjectForm = ({ initialData, onSuccess }: ProjectFormProps) => {
       </ThemedView>
 
       <ThemedView style={styles.inputContainer}>
-      <Controller
-        name="salary"
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <ThemedTextInput
-            placeholder="Salary"
-            keyboardType="numeric"
-            onBlur={onBlur}
-            onChangeText={(text) => onChange(Number(text))}
-            value={value.toString()}
-            withBorder
-            label="Salary"
-          />
+        <Controller
+          name="salary"
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <ThemedTextInput
+              placeholder="Salary"
+              keyboardType="numeric"
+              onBlur={onBlur}
+              onChangeText={(text) => onChange(Number(text))}
+              value={value.toString()}
+              withBorder
+              label="Salary"
+            />
+          )}
+        />
+        {errors.salary && (
+          <ThemedText style={styles.errorText}>
+            {errors.salary.message}
+          </ThemedText>
         )}
-      />
-      {errors.salary && (
-        <ThemedText style={styles.errorText}>
-          {errors.salary.message}
-        </ThemedText>
-      )}
       </ThemedView>
 
       <ThemedView style={styles.inputContainer}>
-      <Controller
-        name="currency"
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <ThemedTextInput
-            placeholder="Currency"
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            withBorder
-          />
+        <Controller
+          name="currency"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <ThemedPicker
+              selectedValue={value}
+              onValueChange={onChange}
+              items={[
+                { label: "USD ($)", value: "$" },
+                { label: "EUR (€)", value: "€" },
+                { label: "GBP (£)", value: "£" },
+                { label: "JPY (¥)", value: "¥" },
+              ]}
+              withBorder
+              label="Currency"
+            />
+          )}
+        />
+        {errors.currency && (
+          <ThemedText style={styles.errorText}>
+            {errors.currency.message}
+          </ThemedText>
         )}
-      />
-      {errors.currency && (
-        <ThemedText style={styles.errorText}>
-          {errors.currency.message}
-        </ThemedText>
-      )}
       </ThemedView>
 
       <Button
