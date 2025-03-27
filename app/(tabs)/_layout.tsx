@@ -1,12 +1,13 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import HeaderBackground from '@/components/ui/HeaderBackground';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -15,24 +16,23 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveBackgroundColor:
+          Colors[colorScheme ?? "light"].tabBarActiveBackground,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
-          },
-          default: {},
-        }),
+        // tabBarButton: HapticTab,
+        tabBarBackground: () => <HeaderBackground />,
+        // tabBarItemStyle: styles.tabBatItem,
+        // tabBarStyle: styles.tabBar,
+        // tabBarLabelStyle: styles.tabBarLabel,
+        // tabBarIconStyle: styles.tabBarIcon,
       }}
     >
       <Tabs.Screen
         name="(work)"
         options={{
           title: "Work",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="suitcase.fill" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="suitcase.fill" color={color} />
           ),
         }}
       />
@@ -40,9 +40,9 @@ export default function TabLayout() {
         name="(analysis)"
         options={{
           title: "Analysis",
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color, size }) => (
             <IconSymbol
-              size={28}
+              size={size}
               name="chart.line.uptrend.xyaxis"
               color={color}
             />
@@ -53,8 +53,8 @@ export default function TabLayout() {
         name="(finances)"
         options={{
           title: "Finances",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="arrow.up.arrow.down" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="arrow.up.arrow.down" color={color} />
           ),
         }}
       />
@@ -62,11 +62,32 @@ export default function TabLayout() {
         name="(account)"
         options={{
           title: "Account",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person.fill" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="person.fill" color={color} />
           ),
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBatItem: {
+    flex: 1,
+    paddingHorizontal: 8,
+    borderRadius: 15,
+    // padding: 8,
+  },
+  tabBar: {
+    flex: 1,
+    borderRadius: 15,
+    marginHorizontal: 30,
+    position: "absolute",
+    bottom: 20,
+    height: 60,
+  },
+  tabBarIcon: {},
+  tabBarLabel: {
+    fontSize: 10,
+  },
+});

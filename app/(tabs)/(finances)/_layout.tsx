@@ -1,6 +1,8 @@
 import { Stack } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/constants/Colors";
+import { LinearGradient } from "expo-linear-gradient";
+import HeaderBackground from "@/components/ui/HeaderBackground";
 
 export default function PayoutLayout() {
   const colorScheme = useColorScheme() ?? "light";
@@ -8,9 +10,9 @@ export default function PayoutLayout() {
   return (
     <Stack
       screenOptions={{
-        headerStyle: {
-          backgroundColor: Colors[colorScheme].headerBackground,
-        },
+        headerBackground: () => (
+          <HeaderBackground />
+        ),
         headerTintColor: colorScheme === "dark" ? "#ECEDEE" : "#11181C",
       }}
     >
