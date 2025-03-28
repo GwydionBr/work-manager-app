@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useWorkStore } from "@/stores/workManagerStore";
-import { SwipeListView } from "react-native-swipe-list-view";
+import { SwipeListView, SwipeRow } from "react-native-swipe-list-view";
 import ProjectRow from "./ProjectRow";
 import { ThemedText } from "@/components/ThemedText";
 import IconButton from "@/components/ui/IconButton";
@@ -19,31 +19,6 @@ const ListProjects = () => {
     deleteProject(projectId);
   }
 
-  const renderHiddenItem = (rowData: any, rowMap: any) => (
-    <View style={styles.rowBack}>
-      <IconButton
-        icon="pencil"
-        size={30}
-        color="white"
-        buttonStyle={styles.editButton}
-        onPress={() => {
-          router.push(`/(tabs)/(work)/${rowData.item.project.id}/editProject`);
-          rowMap[rowData.item.project.key].closeRow();
-        }}
-      />
-      <IconButton
-        icon="trash"
-        size={30}
-        color="white"
-        buttonStyle={styles.deleteButton }
-        onPress={() => {
-          handleDeleteSwipe({ projectId: rowData.item.project.id });
-          rowMap[rowData.item.project.key].closeRow();
-        }}
-      />
-    </View>
-  );
-
   if (!projects.length) {
     return <ThemedText style={styles.centered}>No projects</ThemedText>;
   }
@@ -51,17 +26,45 @@ const ListProjects = () => {
   return (
     <SwipeListView
       data={projects}
-      renderItem={({ item }) => (
-        <ProjectRow
-          project={item.project}
-          onPress={handleProjectPress.bind(this, {
-            projectId: item.project.id,
-          })}
-        />
+      keyExtractor={(item) => item.project.id}
+      renderItem={(data, rowMap) => (
+        <SwipeRow
+          rightOpenValue={-75}
+          leftOpenValue={75}
+          stopLeftSwipe={100}
+          stopRightSwipe={-100}
+        >
+          <View style={styles.rowBack}>
+            <IconButton
+              icon="pencil"
+              size={30}
+              color="white"
+              buttonStyle={styles.editButton}
+              onPress={() => {
+                router.push(
+                  `/(tabs)/(work)/${data.item.project.id}/editProject`
+                );
+              }}
+            />
+            <IconButton
+              icon="trash"
+              size={30}
+              color="white"
+              buttonStyle={styles.deleteButton}
+              onPress={() => {
+                handleDeleteSwipe({ projectId: data.item.project.id });
+              }}
+            />
+          </View>
+
+          <ProjectRow
+            project={data.item.project}
+            onPress={handleProjectPress.bind(this, {
+              projectId: data.item.project.id,
+            })}
+          />
+        </SwipeRow>
       )}
-      renderHiddenItem={renderHiddenItem}
-      rightOpenValue={-75}
-      leftOpenValue={75}
       style={styles.listContainer}
     />
   );

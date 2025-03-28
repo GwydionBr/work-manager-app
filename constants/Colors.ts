@@ -20,6 +20,8 @@ export const Colors = {
     inputPlaceholder: "#888888",
     inputText: "#11181C",
     shadow: "#000000",
+    expenseRow: "#f8d7da",
+    incomeRow: "#d4edda",
   },
   dark: {
     text: "#ECEDEE",
@@ -34,6 +36,8 @@ export const Colors = {
     inputPlaceholder: "#888888",
     inputText: "#ECEDEE",
     shadow: "#ffffff",
+    expenseRow: "#842029",
+    incomeRow: "#0f5132",
   },
 };
 
