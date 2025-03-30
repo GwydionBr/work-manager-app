@@ -35,14 +35,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: 10,
   },
   editButton: {
     flex: 1,
     width: 100,
     backgroundColor: "blue",
-    borderEndStartRadius: 10,
-    borderStartStartRadius: 10,
+
     justifyContent: "center",
     alignItems: "flex-start",
     paddingLeft: 20,
@@ -52,8 +50,7 @@ const styles = StyleSheet.create({
     width: 100,
     paddingRight: 20,
     backgroundColor: "red",
-    borderEndEndRadius: 10,
-    borderStartEndRadius: 10,
+
     justifyContent: "center",
     alignItems: "flex-end",
   },

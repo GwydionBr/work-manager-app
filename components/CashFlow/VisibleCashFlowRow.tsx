@@ -1,10 +1,9 @@
 import { StyleSheet, Pressable, View } from "react-native";
 import type { CashFlow } from "@/stores/financesManagerStore";
-import { ThemedView } from "../ThemedView";
 import { ThemedText } from "../ThemedText";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/constants/Colors";
-import { useThemeColor } from "@/hooks/useThemeColor";
+import { formatMoney } from "@/utils/workHelperFunctions";
 
 type CashFlowRowProps = {
   cashFlow: CashFlow;
@@ -24,10 +23,10 @@ const VisibleCashFlowRow = ({ cashFlow, onPress }: CashFlowRowProps) => {
     >
       <View style={[styles.rowContainer, { shadowColor, backgroundColor }]}>
         <View style={styles.leftContainer}>
-          <ThemedText type="subtitle">{cashFlow.title}</ThemedText>
+          <ThemedText style={styles.titleText}>{cashFlow.title}</ThemedText>
         </View>
         <View style={styles.rightContainer}>
-          <ThemedText>{cashFlow.amount}</ThemedText>
+          <ThemedText style={styles.moneyText}>{formatMoney(cashFlow.amount, cashFlow.currency)}</ThemedText>
         </View>
       </View>
     </Pressable>
@@ -42,8 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 15,
-    marginVertical: 10,
-    borderRadius: 10,
+    // borderRadius: 10,
     shadowRadius: 3,
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
@@ -53,4 +51,11 @@ const styles = StyleSheet.create({
   pressed: {
     transform: [{ scale: 0.98 }],
   },
+  titleText: {
+  fontSize: 16,
+  },
+  moneyText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  }
 });

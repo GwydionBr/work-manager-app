@@ -43,9 +43,12 @@ export const Colors = {
 
 
 
-export const ColorGradients: Record<'light' | 'dark', Record<string, [string, string, ...string[]]>> = {
+export const ColorGradients: Record<
+  "light" | "dark",
+  Record<string, [string, string, ...string[]]>
+> = {
   light: {
-    headerBackground: ["#c17388", "#90306f"],
+    headerBackground: ["#f7b531", "#f79431"],
   },
   dark: {
     headerBackground: ["#c17388", "#90306f"],

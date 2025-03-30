@@ -1,72 +1,58 @@
-import { useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
-import { ThemedText } from "@/components/ThemedText";
-import { SwipeListView, SwipeRow } from "react-native-swipe-list-view";
+import { useState, useEffect } from "react";
+import { Text, FlatList, View, StyleSheet } from "react-native";
 import { useFinancesStore } from "@/stores/financesManagerStore";
-import VisibleCashFlowRow from "./VisibleCashFlowRow";
-import HiddenSwipeRow from "./HiddenCashFlowRow";
+import { CashFlow } from "@/stores/financesManagerStore";
+import ListCashFlowDay from "./ListCashFlowDay";
+
+interface DailyCashFlow {
+  day: string;
+  cashFlow: CashFlow[];
+}
 
 const ListCashFlow = () => {
-  const { cashFlow, expenses, incomes } = useFinancesStore();
+  const { cashFlow } = useFinancesStore();
+  const [dailyCashFlow, setDailyCashFlow] = useState<DailyCashFlow[] | null>(
+    null
+  );
 
-  
-  if (!cashFlow || cashFlow.length === 0) {
-    console.log("expenses", expenses);
-    console.log("incomes", incomes);
-    console.log("cashFlow", cashFlow);
-    return (
-      <ThemedText style={styles.centered}>Please add some CashFlow!</ThemedText>
-    );
-  }
-  
-  const router = useRouter();
-  
-  function handleProjectPress({ projectId }: { projectId: string }) {
-    // router.push(`/(tabs)/(work)/${projectId}`);
-  }
+  useEffect(() => {
+    if (cashFlow) {
+      const groupedCashFlow = cashFlow.reduce(
+        (acc: DailyCashFlow[], item: CashFlow) => {
+          const date = new Date(item.date);
+          const dayKey = date.toLocaleDateString("de-DE", {
+            weekday: "short",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          }); // YYYY-MM-DD
 
-  function handleEditSwipe({ projectId }: { projectId: string }) {
-    console.log("Edit project with ID:", projectId);
-  }
-  
-  function handleDeleteSwipe({ projectId }: { projectId: string }) {
-    console.log("Delete project with ID:", projectId);
-  }
+          const existingDay = acc.find((d) => d.day === dayKey);
 
-  const closeRow = (rowMap: any, rowKey: any) => {
-    if (rowMap[rowKey]) {
-      rowMap[rowKey].closeRow();
+          if (existingDay) {
+            existingDay.cashFlow.push(item);
+          } else {
+            acc.push({ day: dayKey, cashFlow: [item] });
+          }
+
+          return acc;
+        },
+        []
+      );
+
+      setDailyCashFlow(groupedCashFlow);
     }
-  };
-
+  }, [cashFlow]);
   return (
-    <SwipeListView
-      data={cashFlow}
-      style={styles.listContainer}
-      swipeRowStyle={{flex: 1}}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={(data, rowKey) => (
-        <SwipeRow
-          // disableRightSwipe={true}
-          leftOpenValue={75}
-          rightOpenValue={-75}
-          stopLeftSwipe={100}
-          stopRightSwipe={-100}
-          // style={styles.swipeRow}
-        >
-          {/* Back View (Hidden when not swiped) */}
-          <HiddenSwipeRow
-            onDelete={() => console.log("delete")}
-            onEdit={() => console.log("edit")}
-          />
-
-          {/* Front View (Visible) */}
-          <VisibleCashFlowRow
-            cashFlow={data.item}
-            onPress={() => console.log("pressed")}
-          />
-        </SwipeRow>
+    <FlatList
+      data={dailyCashFlow}
+      keyExtractor={(item) => item.day}
+      renderItem={({ item }) => (
+        <View style={styles.rowContainer}>
+          <ListCashFlowDay cashFlow={item.cashFlow} day={item.day} />
+        </View>
       )}
+      ListEmptyComponent={<Text>Please add some CashFlow!</Text>}
     />
   );
 };
@@ -74,19 +60,9 @@ const ListCashFlow = () => {
 export default ListCashFlow;
 
 const styles = StyleSheet.create({
-  listContainer: {
+  rowContainer: {
     flex: 1,
     paddingTop: 25,
     paddingHorizontal: 10,
-  },
-  centered: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  swipeRow: {
-    flex: 1,
-    marginVertical: 15,
-    alignItems: "stretch",
   },
 });

@@ -4,6 +4,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "react-native";
+import { formatMoney } from "@/utils/workHelperFunctions";
 
 interface ProjectRowProps {
   project: Tables<"timerProject">;
@@ -27,7 +28,7 @@ const ProjectRow = ({ project, onPress }: ProjectRowProps) => {
           </ThemedText>
         </View>
         <View style={styles.rightContainer}>
-          <ThemedText>{project.salary}</ThemedText>
+          <ThemedText>{formatMoney(project.salary, project.currency)}</ThemedText>
         </View>
       </ThemedView>
     </Pressable>

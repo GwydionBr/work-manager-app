@@ -28,7 +28,7 @@ export default function PayoutLayout() {
           ),
         }}
       />
-      <Stack.Screen name="newCashFlow" options={{ headerShown: false }} />
+      <Stack.Screen name="newCashFlow" />
     </Stack>
   );
 }
