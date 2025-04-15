@@ -1,18 +1,17 @@
-import type { DeleteResponse } from '@/types/action.types';
+import type { DeleteResponse } from "@/types/action.types";
 import { supabase } from "@/utils/supabase";
-
 
 interface DeleteExpenseProps {
   expenseId: number;
 }
 
-export async function deleteExpense({ expenseId }: DeleteExpenseProps): Promise<DeleteResponse> {
-
+export async function deleteExpense({
+  expenseId,
+}: DeleteExpenseProps): Promise<DeleteResponse> {
   const expenseResponse = await supabase
-    .from('expense')
+    .from("expense")
     .delete()
-    .eq('id', expenseId);
-
+    .eq("id", expenseId);
 
   if (expenseResponse.error) {
     return {

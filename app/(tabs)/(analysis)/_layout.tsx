@@ -16,7 +16,7 @@ export default function AnalysisScreen() {
         headerTintColor: colorScheme === "dark" ? "#ECEDEE" : "#11181C",
       }}
     >
-      <Stack.Screen name="(analysis)" />
+      <Stack.Screen name="index" />
     </Stack>
   );
 }

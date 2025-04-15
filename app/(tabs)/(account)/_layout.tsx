@@ -1,7 +1,5 @@
 import { Stack } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Colors } from "@/constants/Colors";
-import { LinearGradient } from "expo-linear-gradient";
 import HeaderBackground from "@/components/ui/HeaderBackground";
 
 export default function AccountLayout() {

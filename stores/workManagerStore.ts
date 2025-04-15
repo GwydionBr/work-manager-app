@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import * as actions from "@/actions";
 import { Tables, TablesInsert, TablesUpdate } from "@/types/db.types";
-import { Session } from "@supabase/supabase-js";
 
 export interface TimerProject {
   project: Tables<"timerProject">;
@@ -9,11 +8,9 @@ export interface TimerProject {
 }
 
 interface WorkStore {
-  session: Session | null;
   projects: TimerProject[];
   activeProject: TimerProject | null;
   timerSessions: Tables<"timerSession">[];
-  setSession: (session: Session | null) => void;
   fetchData: () => Promise<void>;
   setActiveProject: (id: string) => void;
   addProject: (project: TablesInsert<"timerProject">) => Promise<boolean>;
@@ -48,11 +45,6 @@ export const useWorkStore = create<WorkStore>((set, get) => ({
   projects: [],
   activeProject: null,
   timerSessions: [],
-  session: null,
-
-  setSession(session) {
-    set({ session });
-  },
 
   async fetchData() {
     const [projects, timerSessions] = await Promise.all([
