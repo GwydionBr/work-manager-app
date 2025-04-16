@@ -3,7 +3,7 @@ import { supabase } from "@/utils/supabase";
 import { StyleSheet, View, Alert } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import Avatar from "@/components/Avatar";
-import { useWorkStore } from "@/stores/workManagerStore";
+import { useAuthStore } from "@/stores/AuthStore";
 import Animated from "react-native-reanimated";
 import ThemedSafeAreaView from "@/components/ThemedSafeAreaView";
 
@@ -13,7 +13,7 @@ export default function AccountScreen() {
   const [website, setWebsite] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
 
-  const { session } = useWorkStore();
+  const { session } = useAuthStore();
 
   useEffect(() => {
     if (session) getProfile();

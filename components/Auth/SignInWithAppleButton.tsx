@@ -17,7 +17,6 @@ export function SignInWithAppleButton() {
               AppleAuthentication.AppleAuthenticationScope.EMAIL,
             ],
           });
-          console.log('Apple credential received:', credential);
           
           // Sign in via Supabase Auth.
           if (credential.identityToken) {
@@ -29,23 +28,21 @@ export function SignInWithAppleButton() {
               provider: "apple",
               token: credential.identityToken,
             });
-            console.log('Supabase sign in result:', { error, user });
             
             if (!error) {
-              console.log('Successfully signed in user:', user);
             } else {
-              console.error('Supabase auth error:', error);
+              console.log('Supabase auth error:', error);
             }
           } else {
-            console.error('No identity token received from Apple');
-            throw new Error("No identityToken.");
+            console.log('No identity token received from Apple');
+            // throw new Error("No identityToken.");
           }
         } catch (e: any) {
           if (e.code === "ERR_REQUEST_CANCELED") {
             console.log('User canceled the sign-in flow');
             // handle that the user canceled the sign-in flow
           } else {
-            console.error('Unexpected error during sign in:', e);
+            console.log('Unexpected error during sign in:', e);
             // handle other errors
           }
         }

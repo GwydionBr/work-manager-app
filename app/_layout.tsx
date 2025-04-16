@@ -21,6 +21,10 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+SplashScreen.setOptions({
+  fade: true,
+})
+
 export default function RootLayout() {
   const { session, isLoading, setSession, setLoading } = useAuthStore();
   const colorScheme = useColorScheme();
