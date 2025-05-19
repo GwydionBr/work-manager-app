@@ -25,6 +25,15 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
+        name="(account)"
+        options={{
+          title: "",
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="line.3.horizontal" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="(work)"
         options={{
           title: "Work",
@@ -52,15 +61,6 @@ export default function TabLayout() {
               name="chart.line.uptrend.xyaxis"
               color={color}
             />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="(account)"
-        options={{
-          title: "Account",
-          tabBarIcon: ({ color, size }) => (
-            <IconSymbol size={size} name="person.fill" color={color} />
           ),
         }}
       />
