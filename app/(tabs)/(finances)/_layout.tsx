@@ -1,34 +1,31 @@
-import { Stack, useRouter } from "expo-router";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { IconSymbol } from "@/components/ui/IconSymbol";
+import { Tabs } from "expo-router";
 import HeaderBackground from "@/components/ui/HeaderBackground";
-import IconButton from "@/components/ui/IconButton";
 
-export default function PayoutLayout() {
-  const colorScheme = useColorScheme() ?? "light";
-  const router = useRouter();
-
+export default function FinancesLayout() {  
   return (
-    <Stack
-      screenOptions={{
-        headerBackground: () => <HeaderBackground />,
-        headerTintColor: colorScheme === "dark" ? "#ECEDEE" : "#11181C",
+    <Tabs screenOptions={{
+      headerBackground: () => <HeaderBackground />,
+    }}>
+      <Tabs.Screen
+        name="navigator"
+      options={{
+        title: "Menu",
+        tabBarIcon: ({ color, size }) => (
+          <IconSymbol name="line.3.horizontal" color={color} size={size} />
+        ),
       }}
-    >
-      <Stack.Screen
-        name="index"
-        options={{
-          title: "Finances",
-          headerRight: ({ tintColor }) => (
-            <IconButton
-              icon="add"
-              color={tintColor}
-              size={24}
-              onPress={() => router.push("/(tabs)/(finances)/newCashFlow")}
-            />
-          ),
-        }}
       />
-      <Stack.Screen name="newCashFlow" />
-    </Stack>
+      <Tabs.Screen
+        name="(financeTab)"
+        options={{
+          headerShown: false,
+          title: "Finances",
+        tabBarIcon: ({ color, size }) => (
+          <IconSymbol name="dollarsign.circle" color={color} size={size} />
+        ),
+      }}
+    />
+    </Tabs>
   );
 }

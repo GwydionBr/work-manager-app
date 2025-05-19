@@ -1,20 +1,36 @@
-import { Stack } from "expo-router";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import HeaderBackground from "@/components/ui/HeaderBackground";
+import { IconSymbol } from "@/components/ui/IconSymbol";
+import { Tabs } from "expo-router";
 
 export default function AccountLayout() {
-  const colorScheme = useColorScheme() ?? "light";
-
   return (
-    <Stack
-      screenOptions={{
-        headerBackground: () => (
-          <HeaderBackground />
-        ),
-        headerTintColor: colorScheme === "dark" ? "#ECEDEE" : "#11181C",
-      }}
-    >
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    <Tabs>
+      <Tabs.Screen
+        name="navigator"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol name="line.3.horizontal" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol name="person.fill" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol name="gearshape.fill" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }

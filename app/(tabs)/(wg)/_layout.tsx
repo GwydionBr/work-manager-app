@@ -20,12 +20,12 @@ export default function WorkLayout() {
         }}
       />
       <Tabs.Screen
-        name="(workTab)"
+        name="wg"
         options={{
           headerShown: false,
-          title: "Work",
+          title: "WG",
           tabBarIcon: ({ color, size }) => (
-            <IconSymbol name="folder" color={color} size={size} />
+            <IconSymbol name="person.2.fill" color={color} size={size} />
           ),
         }}
       />
@@ -37,4 +37,4 @@ const styles = StyleSheet.create({
   addButton: {
     marginBottom: 20,
   },
-})
+});
