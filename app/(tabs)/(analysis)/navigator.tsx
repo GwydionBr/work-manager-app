@@ -1,4 +1,4 @@
-import Navigator from "@/components/Navigator";
+import Navigator from "@/components/Navigator/Navigator";
 
 export default function FinancesNavigator() {
   return <Navigator />;
