@@ -14,7 +14,10 @@ const VisibleCashFlowRow = ({ cashFlow, onPress }: CashFlowRowProps) => {
   const colorScheme = useColorScheme() || "light";
   const shadowColor = Colors[colorScheme].shadow;
 
-  const backgroundColor = cashFlow.type === "expense" ? Colors[colorScheme].expenseRow : Colors[colorScheme].incomeRow;
+  const backgroundColor =
+    cashFlow.type === "expense"
+      ? Colors[colorScheme].expenseRow
+      : Colors[colorScheme].incomeRow;
 
   return (
     <Pressable
@@ -26,7 +29,9 @@ const VisibleCashFlowRow = ({ cashFlow, onPress }: CashFlowRowProps) => {
           <ThemedText style={styles.titleText}>{cashFlow.title}</ThemedText>
         </View>
         <View style={styles.rightContainer}>
-          <ThemedText style={styles.moneyText}>{formatMoney(cashFlow.amount, cashFlow.currency)}</ThemedText>
+          <ThemedText style={styles.moneyText}>
+            {formatMoney(cashFlow.amount, cashFlow.currency)}
+          </ThemedText>
         </View>
       </View>
     </Pressable>
@@ -52,10 +57,10 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.98 }],
   },
   titleText: {
-  fontSize: 16,
+    fontSize: 16,
   },
   moneyText: {
     fontSize: 16,
     fontWeight: "bold",
-  }
+  },
 });

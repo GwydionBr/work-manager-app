@@ -19,17 +19,18 @@ const editProject = () => {
     } else {
       router.back();
     }
-  }
-  , [projectId, projects]);
+  }, [projectId, projects]);
 
   if (!project) {
     return null;
   }
 
-
   return (
     <View style={{ flex: 1 }}>
-      <ProjectForm initialData={project?.project} onSuccess={() => router.back()}/>
+      <ProjectForm
+        initialData={project?.project}
+        onSuccess={() => router.back()}
+      />
     </View>
   );
 };

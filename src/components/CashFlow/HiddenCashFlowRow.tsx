@@ -1,6 +1,5 @@
 import { StyleSheet, View } from "react-native";
 import IconButton from "@/components/ui/IconButton";
-import { ThemedText } from "../ThemedText";
 
 interface HiddenSwipeRowProps {
   onEdit: () => void;

@@ -23,7 +23,7 @@ SplashScreen.preventAutoHideAsync();
 
 SplashScreen.setOptions({
   fade: true,
-})
+});
 
 export default function RootLayout() {
   const { session, isLoading, setSession, setLoading } = useAuthStore();
@@ -44,7 +44,7 @@ export default function RootLayout() {
       setLoading(false);
     });
 
-    supabase.auth.onAuthStateChange(async(_event, session) => {
+    supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       await fetchData();
       await fetchFinanceData();

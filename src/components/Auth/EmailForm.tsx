@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, View, Button, Pressable } from "react-native";
+import { Alert, StyleSheet, View, Pressable } from "react-native";
 import { supabase } from "@/utils/supabase";
 import ThemedTextInput from "../ThemedTextInput";
 import PasswordInput from "./PasswordInput";

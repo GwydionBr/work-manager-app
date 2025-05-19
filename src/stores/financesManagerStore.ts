@@ -2,9 +2,10 @@ import { create } from "zustand";
 import * as actions from "@/actions";
 import { Tables, TablesInsert, TablesUpdate } from "@/types/db.types";
 
-export type CashFlow = Tables<"expense"> & Tables<"income"> & {
-  type: "expense" | "income";
-}
+export type CashFlow = Tables<"expense"> &
+  Tables<"income"> & {
+    type: "expense" | "income";
+  };
 
 interface FinancesStore {
   cashFlow: CashFlow[];
@@ -13,7 +14,10 @@ interface FinancesStore {
   recurringExpenses: Tables<"recurringExpense">[];
   recurringIncomes: Tables<"recurringIncome">[];
   fetchFinanceData: () => Promise<void>;
-  transformCashFlow: (data: { expenses: Tables<"expense">[]; incomes: Tables<"income">[] }) => Promise<void>;
+  transformCashFlow: (data: {
+    expenses: Tables<"expense">[];
+    incomes: Tables<"income">[];
+  }) => Promise<void>;
   addExpense: (expense: TablesInsert<"expense">) => Promise<boolean>;
   addIncome: (income: TablesInsert<"income">) => Promise<boolean>;
   addRecurringExpense: (
@@ -72,19 +76,23 @@ export const useFinancesStore = create<FinancesStore>((set, get) => ({
       expenses: expenses.data,
       incomes: incomes.data,
     });
-
   },
 
-  async transformCashFlow({expenses, incomes}) {
-
-    const transformedExpenses = expenses.map((expense) => ({
-      ...expense,
-      type: "expense",
-    } as CashFlow ));
-    const transformedIncomes = incomes.map((income) => ({
-      ...income,
-      type: "income",
-    } as CashFlow));
+  async transformCashFlow({ expenses, incomes }) {
+    const transformedExpenses = expenses.map(
+      (expense) =>
+        ({
+          ...expense,
+          type: "expense",
+        } as CashFlow)
+    );
+    const transformedIncomes = incomes.map(
+      (income) =>
+        ({
+          ...income,
+          type: "income",
+        } as CashFlow)
+    );
 
     const cashFlow = [...transformedExpenses, ...transformedIncomes];
     const sortedCashFlow = cashFlow.sort((a, b) => {

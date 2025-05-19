@@ -13,7 +13,7 @@ const ProjectDetailScreen = () => {
 
   const [project, setProject] = useState<TimerProject | null>(null);
 
-  const { projectId } = useLocalSearchParams<{ projectId: string}>();
+  const { projectId } = useLocalSearchParams<{ projectId: string }>();
   const { projects } = useWorkStore();
 
   useEffect(() => {

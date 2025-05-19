@@ -8,7 +8,7 @@ import { formatMoney } from "@/utils/workHelperFunctions";
 
 interface ProjectRowProps {
   project: Tables<"timerProject">;
-  onPress: ( ) => void;
+  onPress: () => void;
 }
 
 const ProjectRow = ({ project, onPress }: ProjectRowProps) => {
@@ -28,7 +28,9 @@ const ProjectRow = ({ project, onPress }: ProjectRowProps) => {
           </ThemedText>
         </View>
         <View style={styles.rightContainer}>
-          <ThemedText>{formatMoney(project.salary, project.currency)}</ThemedText>
+          <ThemedText>
+            {formatMoney(project.salary, project.currency)}
+          </ThemedText>
         </View>
       </ThemedView>
     </Pressable>
